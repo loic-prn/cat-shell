@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc *.c -o bin/prog && valgrind --leak-check=full ./bin/prog
+gcc *.c -o ../csh/prog && valgrind --leak-check=full ./../csh/prog
