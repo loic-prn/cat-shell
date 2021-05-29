@@ -1,7 +1,5 @@
 #include "entries.h"
 
-//int pos = 0;
-
 char* read_line(void){
 	short unsigned int buffsize = SIZE;
 	char *buffer = malloc(sizeof(char) * buffsize);
@@ -9,7 +7,9 @@ char* read_line(void){
 	unsigned int i = 0;
 	while(1){
 		c = getchar();
+		// check if end
 		if(c == EOF || c == '\n'){
+			// end the string
 			buffer[i] = '\0';
 			return buffer;
 		}
@@ -19,9 +19,12 @@ char* read_line(void){
 
 		++i;
 
+		// if about to overflow
 		if(i >= SIZE){
 			buffsize += SIZE;
+			// realloc = add space
 			buffer = realloc(buffer, buffsize);
+			// realloc fail
 			if(!buffer){
 				printf("csh:Allocation Error\n");
 				exit(EXIT_FAILURE);
@@ -37,30 +40,52 @@ char **parse_line(char *line){
 	size_t position = 0;
 	char **tokens = (char**) malloc(sizeof(char*) * buffsize);
 	char *tok;
+	// if fail malloc
 	if(!tokens){
 		printf("csh:Allocation Error\n");
 		exit(EXIT_FAILURE);
 	}
-
+	// parse token
 	tok = strtok(line,LIMITERS);
+	// go through the tab until the end
 	while(tok != NULL){
 		tokens[position] = tok;
 		++position;
 
+		// if about to overflow
 		if(position >= buffsize){
 			buffsize += ARG_SIZE;
 			tokens = realloc(tokens, buffsize + sizeof(char*));
+			// if realloc fail
 			if(!tokens){
 				printf("csh:Allocation Error\n");
 				exit(EXIT_FAILURE);
 			}
 		}
-
+		// parse token
 		tok = strtok(NULL, LIMITERS);
 	}
+	/*
 	for(size_t i = 0; i < position; ++i){
 		printf("%s\n", tokens[i]);
 	}
+	*/
+	// put a NULL at the end to delimit
 	tokens[position] = NULL;
 	return tokens;
+}
+
+
+void printer(char **pptr){
+	size_t i = 0;
+	while(pptr[i] != NULL){
+		if(i == 0){
+			printf("%s\n", pptr[i]);
+		}
+		// tab if not first 
+		else{
+			printf("\t%s\n", pptr[i]);
+		}
+		++i;
+	}
 }

@@ -7,3 +7,4 @@
 
 char *read_line(void);
 char **parse_line(char *line);
+void printer(char **pptr);
