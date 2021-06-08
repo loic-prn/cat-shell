@@ -9,6 +9,7 @@ int main(int argc, char* argv[]){
 	}
 	printer(pptr);
 
+	// some github fixes
 	free(ptr); // free
 	free(pptr);
 
