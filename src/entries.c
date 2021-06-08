@@ -3,6 +3,10 @@
 char* read_line(void){
 	short unsigned int buffsize = SIZE;
 	char *buffer = malloc(sizeof(char) * buffsize);
+	if(!buffer){
+		prinft("csh:Allocation Error\n");
+		exit(EXIT_FAILURE);
+	}
 	int c = 0;
 	unsigned int i = 0;
 	while(1){
@@ -39,6 +43,10 @@ char **parse_line(char *line){
 	short unsigned int buffsize = ARG_SIZE;
 	size_t position = 0;
 	char **tokens = (char**) malloc(sizeof(char*) * buffsize);
+	if(!token){
+		printf("csh:Allocation Erroe\n");
+		exit(EXIT_FAILURE);
+	}
 	char *tok;
 	// if fail malloc
 	if(!tokens){
@@ -65,11 +73,6 @@ char **parse_line(char *line){
 		// parse token
 		tok = strtok(NULL, LIMITERS);
 	}
-	/*
-	for(size_t i = 0; i < position; ++i){
-		printf("%s\n", tokens[i]);
-	}
-	*/
 	// put a NULL at the end to delimit
 	tokens[position] = NULL;
 	return tokens;
@@ -82,7 +85,7 @@ void printer(char **pptr){
 		if(i == 0){
 			printf("%s\n", pptr[i]);
 		}
-		// tab if not first 
+		// tab if not first
 		else{
 			printf("\t%s\n", pptr[i]);
 		}
