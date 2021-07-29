@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-//#include <Windows.h>
 #include <dirent.h>
 #include "color.h"
 #include <sys/types.h>

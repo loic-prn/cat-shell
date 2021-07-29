@@ -4,7 +4,7 @@ char* read_line(void){
 	short unsigned int buffsize = SIZE;
 	char *buffer = malloc(sizeof(char) * buffsize);
 	if(!buffer){
-		prinft("csh:Allocation Error\n");
+		printf("csh:Allocation Error\n");
 		exit(EXIT_FAILURE);
 	}
 	int c = 0;
@@ -43,7 +43,7 @@ char **parse_line(char *line){
 	short unsigned int buffsize = ARG_SIZE;
 	size_t position = 0;
 	char **tokens = (char**) malloc(sizeof(char*) * buffsize);
-	if(!token){
+	if(!tokens){
 		printf("csh:Allocation Erroe\n");
 		exit(EXIT_FAILURE);
 	}
